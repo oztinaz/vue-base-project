@@ -1,13 +1,18 @@
 <template>
   <div class="button-container">
-    <button class="btn btn-success">
+    <a type="button" class="btn btn-success" :href="authorizationLink">
       Login
-    </button>
+    </a>
   </div>
 </template>
 
 <script setup lang="ts">
+// stores
+import { useLoginFormStore } from '@/stores/components/login-form';
+import { storeToRefs } from 'pinia';
 
+const loginFormStore = useLoginFormStore()
+const { authorizationLink } = storeToRefs(loginFormStore)
 </script>
 
 <style scoped>
@@ -15,7 +20,7 @@
   width: 100%;
 }
 
-button {
+a {
   float: right;
 }
 </style>
