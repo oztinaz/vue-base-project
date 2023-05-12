@@ -1,6 +1,6 @@
 <template>
   <div id="make-authorization">
-    Make Authorization
+    Making Authorization
   </div>
 </template>
 
@@ -9,16 +9,32 @@
 import { useRoute } from 'vue-router';
 
 // stores
-import { useLoginFormStore } from '@/stores/components/login-form'
+import { useAuthStore } from '@/stores/auth'
 import { onMounted } from 'vue';
+import AccessTokenFactory from '@/factories/access-token';
+import type ApiAccessToken from '@/types/api/access-token';
+import type AccessToken from '@/models/access-token';
+import router from '@/router';
 
 const route = useRoute()
 
-const loginFormStore = useLoginFormStore()
-const { login } = loginFormStore
+const authStore = useAuthStore()
+const { fetchAccessToken, setAccessToken } = authStore
 
 onMounted(async () => {
-  await login(route.query.code as string)
+  const userString: string | null = localStorage.getItem('user')
+  
+  if (userString !== null) {
+    const user = JSON.parse(userString)
+    const apiAccessToken: ApiAccessToken = await fetchAccessToken(route.query.code as string, user.Username)
+    const accessToken: AccessToken = AccessTokenFactory.createFromApiAccessToken(apiAccessToken)
+    setAccessToken(accessToken)
+    localStorage.setItem('access_token', accessToken.toString())
+
+    router.push({
+      name: 'home'
+    })
+  }
 })
 </script>
 
