@@ -2,7 +2,6 @@ import ValidationTooltip from '@/components/validation-tooltip/ValidationTooltip
 import { mount, type VueWrapper } from '@vue/test-utils'
 import { beforeEach, describe, expect, test } from 'vitest'
 import { faker } from '@faker-js/faker'
-import { ArrayUtils } from '@/utils/Array'
 import type { Validation } from '@/types/Validation'
 
 describe('@/components/validation-tooltip/ValidationTooltip', () => {

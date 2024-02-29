@@ -51,7 +51,7 @@ describe('@/components/validation-tooltip/ValidationTooltipToggler', () => {
       validations: [
         {
           explanation: faker.lorem.sentence(),
-          validator: (value: any): boolean => {
+          validator: (): boolean => {
             return true
           }
         }
