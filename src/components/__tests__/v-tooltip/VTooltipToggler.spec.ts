@@ -7,7 +7,7 @@ describe('@/components/v-tooltip/VTooltipToggler', () => {
   let wrapper: VueWrapper
   const isOpen: Ref<boolean> = ref(false)
   const size: Ref<number> = ref(0)
-  
+
   beforeEach(() => {
     wrapper = shallowMount(VTooltipToggler, {
       props: {
